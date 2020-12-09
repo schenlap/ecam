@@ -38,6 +38,11 @@ SysStatPanel::SysStatPanel(QWidget *parent) :
 	signalMapper->setMapping(cond_but, 3);
 	connect(cond_but, SIGNAL(released()), signalMapper, SLOT(map()));
 
+	QPushButton *pfd_but = new QPushButton("PFD");
+	pfd_but->setPalette(palette1);
+	signalMapper->setMapping(pfd_but, 4);
+	connect(pfd_but, SIGNAL(released()), signalMapper, SLOT(map()));
+
 	QPushButton *to_but = new QPushButton("T.O\nConfig");
 	to_but->setPalette(palette1);
 	signalMapper->setMapping(to_but, 10);
@@ -50,6 +55,7 @@ SysStatPanel::SysStatPanel(QWidget *parent) :
 	layout->addWidget(fuel_but, 0, 1);
 	layout->addWidget(bleed_but, 0, 2);
 	layout->addWidget(cond_but, 0, 3);
+	layout->addWidget(pfd_but, 0, 4);
 	layout->addWidget(ha, 1, 0);
 	layout->addWidget(to_but, 1, 1);
 

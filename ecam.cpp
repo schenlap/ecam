@@ -9,6 +9,8 @@
 #include "pages/fuel_page.h"
 #include "pages/bleed_page.h"
 #include "pages/cond_page.h"
+#include "pages/pfd_page.h"
+
 #include "panels/sys_stat_panel.h"
 #include "widgets/analogclock.h"
 
@@ -42,6 +44,7 @@ Ecam::Ecam(QWidget *parent) :
 	_fuel = new FuelPage;
 	_bleed = new BleedPage;
 	_cond = new CondPage;
+	_pfd = new PfdPage;
 
 	_tmp_time = new TmpTime(parent, _fuel, _bleed, _cond);
 
@@ -49,6 +52,7 @@ Ecam::Ecam(QWidget *parent) :
 	_sw->addWidget(_fuel);
 	_sw->addWidget(_bleed);
 	_sw->addWidget(_cond);
+	_sw->addWidget(_pfd);
 	_sw->addWidget(_analogclock);
 	_sw->setCurrentWidget(_cond);
 
@@ -63,6 +67,7 @@ Ecam::Ecam(QWidget *parent) :
 	setCentralWidget(wid);
 	//setCentralWidget(sys_panel);
 	show();
+	switchpage(4);
 
 	connect(sys_panel, SIGNAL(switchpage(int)), this, SLOT(switchpage(int)));
 
@@ -86,6 +91,8 @@ void Ecam::switchpage(int p) {
 		_sw->setCurrentWidget(_bleed);
 	else if (p == 3)
 		_sw->setCurrentWidget(_cond);
+	else if (p == 4)
+		_sw->setCurrentWidget(_pfd);
 }
 
 
@@ -179,7 +186,7 @@ void Ecam::mousePressEvent(QMouseEvent *e)
 
 {
 	QPoint point=e->pos();
-	qDebug("QPoint(%d,%d)", point.x(), point.y() );
+	qDebug("Ecam: QPoint(%d,%d)", point.x(), point.y() );
 
 	QMainWindow::mousePressEvent(e);
 

@@ -9,6 +9,7 @@ class EwdPage;
 class FuelPage;
 class BleedPage;
 class CondPage;
+class PfdPage;
 class AnalogClock;
 class QStackedWidget;
 class QVBoxLayout;
@@ -33,7 +34,7 @@ public:
 
 private:
 	Ui::EcamClass _ui;
-#ifdef __arm	
+#ifdef __arm
 	GESys::SysFile _brightness;
 #endif
 	QVBoxLayout *_mainlayout;
@@ -42,6 +43,7 @@ private:
 	FuelPage *_fuel;
 	BleedPage *_bleed;
 	CondPage *_cond;
+	PfdPage *_pfd;
 	AnalogClock *_analogclock;
 	AnalogClock *_analogclock2;
 	Pages _curpage;
