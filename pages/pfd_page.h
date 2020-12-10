@@ -4,6 +4,8 @@
 #include <QtSvg/QSvgRenderer>
 #include <QWidget>
 
+class QGraphicsView;
+class QGraphicsScene;
 class QLabel;
 class Pump;
 class Valve;
@@ -29,8 +31,10 @@ public:
 
 private:
 	Ui::PfdPage *ui;
-	QSvgRenderer *_svgr;
-	QPixmap *_pm;
+	QGraphicsView *_view;
+	QGraphicsScene *_scene;
+	QSvgRenderer *_svgr, *_svgh;
+	QPixmap *_pm, *_pmh;
 
 
 protected:

@@ -4,6 +4,9 @@
 #include <QPainter>
 #include <QtSvg/QSvgRenderer>
 #include <QLabel>
+#include <QGraphicsSvgItem>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 #include "pfd_page.h"
 #include "ui_pfd_page.h"
@@ -16,13 +19,18 @@ PfdPage::PfdPage(QWidget *parent) :
 {
 	ui->setupUi(this);
 
-	QString fn = QString("../ui/pfd_with_background.svg");
-	//QString fn = QString("../ui/pfd.svg");
-	_svgr = new QSvgRenderer(fn);// (&fn, parent);
-	_pm = new QPixmap(480, 600);
-	_pm->fill(Qt::green);
-	//QPainter painter(&pm);
+	_scene = new QGraphicsScene();
+	_view = new QGraphicsView();
 
+	_scene->setSceneRect(this->_view->rect());
+	_view->setScene(this->_scene);
+
+	//_svgr = new QSvgRenderer(QString("../ui/pfd_with_background.svg"));
+	_svgr = new QSvgRenderer(QString("../ui/pfd.svg"));
+	_svgh = new QSvgRenderer(QString("../ui/pfd_horizont.svg"));
+	_pmh = new QPixmap(300, 600);
+	_pm = new QPixmap(480, 480);
+	_pm->fill(Qt::green);
 
 }
 
@@ -31,13 +39,8 @@ void PfdPage::paintEvent(QPaintEvent *) {
 	QPainter painter(this);
 	painter.setRenderHint((QPainter::Antialiasing));
 
-	if(_svgr->elementExists("text1517")) {
-		qDebug("Element found");
-	}
+	_svgh->render(&painter, QRectF(80,-50-3,300,600)); // level
 	_svgr->render(&painter, _pm->rect());
-	//painter.setPen(QPen(Qt::green, linewidth));
-
-
 }
 
 
